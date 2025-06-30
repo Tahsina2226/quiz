@@ -1,19 +1,24 @@
 import React from "react";
 
-export default function Quizcontrol({ onPrev, onNext }) {
+interface QuizControlProps {
+  onPrev: () => void;
+  onNext: () => void;
+}
+
+export default function Quizcontrol({ onPrev, onNext }: QuizControlProps) {
   return (
-    <div className="flex justify-center space-x-6 mt-6">
+    <div className="flex justify-between mt-6">
       <button
         onClick={onPrev}
-        className="bg-teal-200 hover:bg-teal-300 px-6 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400 text-teal-800 transition-colors duration-200"
+        className="bg-gray-200 hover:bg-gray-300 px-6 py-2 rounded-md text-gray-800 transition"
       >
-        Previous
+        পূর্ববর্তী
       </button>
       <button
         onClick={onNext}
-        className="bg-red-300 hover:bg-red-400 px-6 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400 text-red-900 transition-colors duration-200"
+        className="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded-md text-white transition"
       >
-        Next
+        পরবর্তী
       </button>
     </div>
   );

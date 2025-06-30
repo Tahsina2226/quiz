@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../Redux/hooks";
 import { setAnswer } from "../Redux/features/quizSlice";
 import Quizcontrol from "./Quizcontrol";
+import QuizSummary from "./QuizSummary";
 
 export default function Question() {
   const dispatch = useAppDispatch();
@@ -29,6 +30,9 @@ export default function Question() {
 
   return (
     <div className="flex flex-col justify-center bg-blue-50 mx-auto p-6 max-w-3xl min-h-screen">
+      {/* ✅ Add summary at top */}
+      <QuizSummary currentIndex={currentIndex} />
+
       <div className="bg-white shadow-md hover:shadow-lg p-6 border border-gray-200 rounded-xl transition-shadow duration-300">
         <h2 className="mb-3 font-semibold text-gray-700 text-2xl">
           প্রশ্ন {currentIndex + 1}:
