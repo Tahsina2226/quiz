@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import { useAppSelector } from "../Redux/hooks";
+import { useAppSelector, useAppDispatch } from "../Redux/hooks";
+import { setAnswer } from "../Redux/features/quizSlice";
 import Quizcontrol from "./Quizcontrol";
 
 export default function Question() {
-  const questions = useAppSelector((state) => state.quiz);
+  const dispatch = useAppDispatch();
+  const quiz = useAppSelector((state) => state.quiz);
+  const questions = quiz.questions;
+  const userAnswer = quiz.userAnswer;
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrev = () => {
@@ -17,9 +21,14 @@ export default function Question() {
   if (questions.length === 0) return <p>No questions available.</p>;
 
   const currentQuestion = questions[currentIndex];
+  const selectedAnswer = userAnswer[currentIndex];
+
+  const handleOptionClick = (option: string) => {
+    dispatch(setAnswer({ Questionindex: currentIndex, anser: option }));
+  };
 
   return (
-    <div className="flex flex-col justify-center bg-gray-50 mx-auto p-6 max-w-3xl min-h-screen">
+    <div className="flex flex-col justify-center bg-blue-50 mx-auto p-6 max-w-3xl min-h-screen">
       <div className="bg-white shadow-md hover:shadow-lg p-6 border border-gray-200 rounded-xl transition-shadow duration-300">
         <h2 className="mb-3 font-semibold text-gray-700 text-2xl">
           প্রশ্ন {currentIndex + 1}:
@@ -30,7 +39,12 @@ export default function Question() {
           {currentQuestion.options.map((option, i) => (
             <button
               key={i}
-              className="bg-gray-100 hover:bg-gray-200 px-4 py-3 border border-gray-300 hover:border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300 w-full text-gray-800 text-left transition-colors duration-200"
+              onClick={() => handleOptionClick(option)}
+              className={`px-4 py-3 border rounded-md w-full text-left transition-all duration-200 ${
+                selectedAnswer === option
+                  ? "bg-green-500 text-white border-green-600"
+                  : "bg-blue-100 hover:bg-blue-200 text-blue-900 border-blue-200 hover:border-blue-300"
+              }`}
             >
               {option}
             </button>
