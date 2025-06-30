@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../Store";
+import { quizData } from "@/Home/Quizdata";
 
-const initialState = { value: 0 };
+const initialState = quizData;
 
-export const counterSlice = createSlice({
-  name: "quiz",
+export const quizSlice = createSlice({
+  name: "question",
   initialState,
   reducers: {},
 });
 
-export const selectCount = (state: RootState) => state.quiz.value;
-
-export default counterSlice.reducer;
+export default quizSlice.reducer;
+//quizdata k ekane initial vabe set krse    eta r quiz data connected;

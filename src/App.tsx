@@ -1,7 +1,9 @@
+import Question from "./Home/Question";
+
 function App() {
   return (
     <div>
-      <h1>Hello from App</h1>
+      <Question></Question>
     </div>
   );
 }
